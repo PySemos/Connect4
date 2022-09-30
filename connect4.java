@@ -7,9 +7,16 @@ public class connect4{
       Player player = new Player("S");
       Player player2 = new Player("J");
       Board board = new Board(player,player2);
-      board.play(2,player);
-      board.play(1,player2);
-      board.play(2,player3);
+      board.play(5,player2);
+      board.play(5,player2);
+      board.play(5,player2);
+      board.play(5,player2);
+      board.play(5,player);
+      board.play(5,player);
+      board.play(5,player);
+      board.play(5,player);
+      board.play(5,player);
       board.print();
+      System.out.println(board.won(player));
    }
 }

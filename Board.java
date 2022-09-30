@@ -9,7 +9,7 @@ public class Board{
    private String[][] board;
    private String nonPlayedPosition = "-";
    private Boolean terminated = false;
-   private Player[] players;
+   public Player[] players;
    Board(Player player1, Player player2){
       players = new Player[2];
       players[0] = player1;
@@ -58,11 +58,86 @@ public class Board{
                   }
             }
          }
+         }
          else{
-            System.out.println("No in players");
+             return;
          }
       }
+      
+   private Boolean wonHorizontal(Player player,int index){
+      if (index>=0 && index <size){
+         for(int i=0;i<size-3;i++){
+            if(player.representation == board[index][i] && player.representation == board[index][i+1] && player.representation == board[index][i+2] && player.representation == board[index][i+3]){
+                  return true;
+            }
+         }
+         return false;
+      }
+      else{
+         System.out.println("Index Error");
+         return false;
+      }
+   }
+   
+   private Boolean wonVertical(Player player,int column){
+      if (column>=0 && column < size){
+         for(int i=0;i<size-3;i++){
+            if(player.representation == board[i][column] && player.representation == board[i+1][column] && player.representation == board[i+2][column] && player.representation == board[i+3][column]){
+                  return true;
+            }
+         }
+         return false;
+      }
+      else{
+         System.out.println("Index Error");
+         return false;
+      }
+   }
+   
+   private Boolean wonDiagonal(Player player){
+         for(int i = 0;i<size;i++){
+            //Down
+            if(i<=size-3){
+               for(int j=0;j<=size-3;j++){
+                  if(player.representation== board[i][j] && player.representation == board[i+1][j+1] && player.representation== board[i+2][j+2] && player.representation== board[i+3][j+3]){
+                      return true;
+                  }
+                  }
+               }
+            }
+            //Up
+            else if(i>=size-3){
+               for(int j=size-3;j<=size;j++){
+                  if(j<=size-3){
+                     // I am missing thid sentence
+                     if(player.representation== board[i][j] && player.representation == board[i+1][j+1] && player.representation== board[i+2][j+2] && player.representation== board[i+3][j+3]){
+                           return true;
+                     }
+                  }
+               }
+            }
+         }
    }
 
+   public Boolean won(Player player){
+         // Horizontal
+         for(int i = 0;i<size;i++){
+            if(wonHorizontal(player,i)){
+               System.out.println("Won row: " + Integer.toString(i));
+               return true;
+            }
+         }
+         // Vertical
+         for(int j = 0;j<size;j++){
+               if(wonVertical(player,j)){
+                  System.out.println("Won column: " + Integer.toString(j));
+                  return true;
+               }
+         }
+         return false;
+   }
+      
 
-}
+   }
+   
+
