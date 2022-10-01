@@ -95,30 +95,23 @@ public class Board{
    }
    
    private Boolean wonDiagonal(Player player){
-         for(int i = 0;i<size;i++){
+         for(int i = 0;i<size-3;i++){
             //Down
-            if(i<=size-3){
-               for(int j=0;j<=size-3;j++){
-                  if(player.representation== board[i][j] && player.representation == board[i+1][j+1] && player.representation== board[i+2][j+2] && player.representation== board[i+3][j+3]){
-                      return true;
-                  }
-                  }
+            for(int j=0;j<size-3;j++){
+               if(player.representation== board[i][j] && player.representation == board[i+1][j+1] && player.representation== board[i+2][j+2] && player.representation== board[i+3][j+3]){
+                     return true;
                }
             }
             //Up
-            else if(i>=size-3){
-               for(int j=size-3;j<=size;j++){
-                  if(j<=size-3){
-                     // I am missing thid sentence
-                     if(player.representation== board[i][j] && player.representation == board[i+1][j+1] && player.representation== board[i+2][j+2] && player.representation== board[i+3][j+3]){
-                           return true;
-                     }
-                  }
+            for(int j=size-1;j>2;j--){
+               // I am missing thid sentence
+               if(player.representation == board[i][j] && player.representation == board[i+1][j-1] && player.representation== board[i+2][j-2] && player.representation== board[i+3][j-3]){
+                  return true;
+               }
                }
             }
+         return false;
          }
-   }
-
    public Boolean won(Player player){
          // Horizontal
          for(int i = 0;i<size;i++){
@@ -133,6 +126,10 @@ public class Board{
                   System.out.println("Won column: " + Integer.toString(j));
                   return true;
                }
+         }
+         if(wonDiagonal(player)){
+            System.out.println("Won Diagonal: ");
+            return true;
          }
          return false;
    }
